@@ -9,7 +9,7 @@ import java.util.List;
 public class VariableUtils {
 
     public static List<Variable> getVariables(SquareBoardGame squareBoardGame) {
-        int boardLength = squareBoardGame.getBoardLength();
+        int boardLength = squareBoardGame.getSize();
         List<Variable> variables = new ArrayList<>(boardLength * boardLength);
         for (int i = 0; i < boardLength; i++) {
             for (int j = 0; j < boardLength; j++) {

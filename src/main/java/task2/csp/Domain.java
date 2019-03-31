@@ -8,7 +8,7 @@ public class Domain {
     private final List<Integer> domainValues;
 
     public Domain(int upperRange) {
-        domainValues = IntStream.range(1, upperRange).boxed().collect(Collectors.toList());
+        domainValues = IntStream.rangeClosed(1, upperRange).boxed().collect(Collectors.toList());
     }
 
     public List<Integer> getDomainValues() {

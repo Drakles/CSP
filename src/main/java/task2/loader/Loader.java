@@ -1,6 +1,8 @@
 package task2.loader;
 
 import task2.boardgame.FutoshikiSquareBoardGameImpl;
+import task2.csp.Assigment;
+import task2.csp.Variable;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,42 +24,45 @@ public class Loader {
 
                 System.out.println(sc.nextLine());
 
-                int[][] board = new int[size][size];
+                List<Assigment> initialAssigments = new LinkedList<>();
 
                 System.out.println(sc.nextLine());
 
                 for (int i = 0; i < size; i++) {
                     String[] split = sc.nextLine().split(";");
                     for (int j = 0; j < split.length; j++) {
-                        board[j][i] = Integer.valueOf(split[j]);
+                        int value = Integer.valueOf(split[j]);
+                        if (value != 0) {
+                            initialAssigments.add(new Assigment(value, new Variable(j, i)));
+                        }
                     }
                 }
 
                 System.out.println(sc.nextLine());
 
-                List<int[]> relations = new LinkedList<>();
+                List<Variable[]> relations = new LinkedList<>();
 
                 while (sc.hasNext()) {
-                    int[] relation = new int[4];
+                    Variable[] relation = new Variable[2];
                     int i = 0;
                     for (String coord : sc.nextLine().split(";")) {
                         int rowIndex = coord.charAt(0) - 65;
                         int columnIndex = Character.getNumericValue(coord.charAt(1)) - 1;
 
-                        relation[i++] = columnIndex;
-                        relation[i++] = rowIndex;
+                        Variable var = new Variable(columnIndex, rowIndex);
+                        relation[i++] = var;
                     }
                     relations.add(relation);
                 }
 
-                int[][] converted = new int[relations.size()][4];
-                Iterator<int[]> relIter = relations.iterator();
+                Variable[][] relationsConverted = new Variable[relations.size()][2];
+                Iterator<Variable[]> relIter = relations.iterator();
 
-                for (int i = 0; i < converted.length; i++) {
-                    converted[i] = relIter.next();
+                for (int i = 0; i < relationsConverted.length; i++) {
+                    relationsConverted[i] = relIter.next();
                 }
 
-                futoshikiBoardGame = new FutoshikiSquareBoardGameImpl(board, converted);
+                futoshikiBoardGame = new FutoshikiSquareBoardGameImpl(size, initialAssigments, relationsConverted);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

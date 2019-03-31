@@ -1,26 +1,33 @@
 package task2.boardgame;
 
-import java.util.Arrays;
+import task2.csp.Assigment;
+
+import java.util.List;
 
 public abstract class SquareSquareBoardGameImpl implements SquareBoardGame {
-    final int[][] board;
+    final int size;
+    final List<Assigment> initialAssigment;
 
-    public SquareSquareBoardGameImpl(int[][] board) {
-        this.board = board;
+    public SquareSquareBoardGameImpl(int size, List<Assigment> initialAssigment) {
+        this.size = size;
+        this.initialAssigment = initialAssigment;
     }
 
-    public int[][] getBoard() {
-        return board;
+    @Override
+    public List<Assigment> getInitialAssigment() {
+        return initialAssigment;
     }
 
-    public int getBoardLength() {
-        return board.length;
+    @Override
+    public int getSize() {
+        return size;
     }
 
     @Override
     public String toString() {
         return "SquareSquareBoardGameImpl{" +
-                "board=" + Arrays.toString(board) +
+                "size=" + size +
+                ", initialAssigment=" + initialAssigment +
                 '}';
     }
 }
