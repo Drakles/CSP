@@ -2,11 +2,11 @@ package task2.boardgame;
 
 import java.util.Arrays;
 
-public class FutoshikiBoardGame extends SquareBoardGame {
+public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
 
     private final int[][] relations;
 
-    public FutoshikiBoardGame(int[][] board, int[][] relations) {
+    public FutoshikiSquareBoardGameImpl(int[][] board, int[][] relations) {
         super(board);
         this.relations = relations;
     }
@@ -21,7 +21,7 @@ public class FutoshikiBoardGame extends SquareBoardGame {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("FutoshikiBoardGame{ ");
+        sb.append("FutoshikiSquareBoardGameImpl{ ");
 
         sb.append("board: [");
         for (int[] singleRow : board) {

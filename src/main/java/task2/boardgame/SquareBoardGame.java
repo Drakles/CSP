@@ -1,22 +1,9 @@
 package task2.boardgame;
 
-import java.util.Arrays;
+public interface SquareBoardGame {
 
-public abstract class SquareBoardGame implements BoardGame{
-    final int[][] board;
+    int[][] getBoard();
+    int getBoardLength();
+    int[][] getConstraints();
 
-    public SquareBoardGame(int[][] board) {
-        this.board = board;
-    }
-
-    public int[][] getBoard() {
-        return board;
-    }
-
-    @Override
-    public String toString() {
-        return "SquareBoardGame{" +
-                "board=" + Arrays.toString(board) +
-                '}';
-    }
 }

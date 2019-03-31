@@ -1,6 +1,6 @@
 package task2.loader;
 
-import task2.boardgame.FutoshikiBoardGame;
+import task2.boardgame.FutoshikiSquareBoardGameImpl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class Loader {
 
-    public static FutoshikiBoardGame scanFutoshikiBoard(String filePath) {
-        FutoshikiBoardGame futoshikiBoardGame = null;
+    public static FutoshikiSquareBoardGameImpl scanFutoshikiBoard(String filePath) {
+        FutoshikiSquareBoardGameImpl futoshikiBoardGame = null;
         if (filePath != null) {
             File sourceFile = new File(filePath);
             try {
@@ -57,7 +57,7 @@ public class Loader {
                     converted[i] = relIter.next();
                 }
 
-                futoshikiBoardGame = new FutoshikiBoardGame(board, converted);
+                futoshikiBoardGame = new FutoshikiSquareBoardGameImpl(board, converted);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
