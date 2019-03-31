@@ -1,7 +1,7 @@
-package csp;
+package task2;
 
-import csp.boardgame.FutoshikiBoardGame;
-import csp.loader.Loader;
+import task2.boardgame.FutoshikiBoardGame;
+import task2.loader.Loader;
 
 
 public class App {

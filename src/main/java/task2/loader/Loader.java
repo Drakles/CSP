@@ -1,6 +1,6 @@
-package csp.loader;
+package task2.loader;
 
-import csp.boardgame.FutoshikiBoardGame;
+import task2.boardgame.FutoshikiBoardGame;
 
 import java.io.File;
 import java.io.FileNotFoundException;

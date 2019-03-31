@@ -1,8 +1,8 @@
-package csp.boardgame;
+package task2.boardgame;
 
 import java.util.Arrays;
 
-public abstract class SquareBoardGame {
+public abstract class SquareBoardGame implements BoardGame{
     final int[][] board;
 
     public SquareBoardGame(int[][] board) {

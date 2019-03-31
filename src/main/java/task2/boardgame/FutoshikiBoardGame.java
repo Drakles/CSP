@@ -1,4 +1,4 @@
-package csp.boardgame;
+package task2.boardgame;
 
 import java.util.Arrays;
 
@@ -11,9 +11,11 @@ public class FutoshikiBoardGame extends SquareBoardGame {
         this.relations = relations;
     }
 
-    public int[][] getRelations() {
+    @Override
+    public int[][] getConstraints() {
         return relations;
     }
+
 
     @Override
     public String toString() {
