@@ -21,7 +21,7 @@ public class App {
 
         List<Assigment> initialAssigmentCopy = new LinkedList<>(futoshikiBoardGame.getInitialAssigment());
 
-        backTracking.perform(initialAssigmentCopy, VariableUtils.getVariables(futoshikiBoardGame));
+        backTracking.perform(initialAssigmentCopy, VariableUtils.getVariables(futoshikiBoardGame), 0);
 
         System.out.println(initialAssigmentCopy);
     }

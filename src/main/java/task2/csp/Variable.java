@@ -19,6 +19,10 @@ public class Variable {
         return rowIndex;
     }
 
+    public boolean isCoordEquals(int columnIndex,int rowIndex){
+        return this.columnIndex == columnIndex && this.rowIndex == rowIndex;
+    }
+
     @Override
     public String toString() {
         return "Variable{" +
