@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import static task2.csp.AssigmentFactory.createAssigment;
+
 public class Loader {
 
     public static FutoshikiSquareBoardGameImpl scanFutoshikiBoard(String filePath) {
@@ -33,7 +35,7 @@ public class Loader {
                     for (int j = 0; j < split.length; j++) {
                         int value = Integer.valueOf(split[j]);
                         if (value != 0) {
-                            initialAssigments.add(new Assigment(value, new Variable(j, i)));
+                            initialAssigments.add(createAssigment(value, new Variable(j, i)));
                         }
                     }
                 }

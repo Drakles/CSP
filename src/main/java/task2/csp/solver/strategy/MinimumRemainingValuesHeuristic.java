@@ -13,10 +13,15 @@ public class MinimumRemainingValuesHeuristic implements Heuristic {
         Variable chosen = null;
         if (!variableList.isEmpty()) {
             chosen = variableList.get(0);
-            int minPotentialValues = game.getPotentialValues(chosen,assigments).size();
+            int minPotentialValues = game.getPotentialValues(chosen, assigments).size();
             for (Variable variable : variableList) {
-                if (game.getPotentialValues(variable,assigments).size() < minPotentialValues) {
+                int nextPotentialValuesNumber = game.getPotentialValues(variable, assigments).size();
+                if (nextPotentialValuesNumber < minPotentialValues) {
                     chosen = variable;
+                    minPotentialValues = nextPotentialValuesNumber;
+                    if (nextPotentialValuesNumber == 1) {
+                        return chosen;
+                    }
                 }
             }
         }

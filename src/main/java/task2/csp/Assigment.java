@@ -6,7 +6,7 @@ public class Assigment {
     private final int value;
     private final Variable var;
 
-    public Assigment(int value, Variable var) {
+    Assigment(int value, Variable var) {
         this.value = value;
         this.var = var;
     }
