@@ -16,4 +16,6 @@ public interface SquareBoardGame {
   Domain getDomain();
 
   List<Assigment> getInitialAssigment();
+
+  Variable[][] getConstraints();
 }

@@ -11,15 +11,15 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
 
   private final Domain domain;
   /*
-  Describe relations between fields of board, where every array in first array dimension consist of 2 Variable objects
+  Describe constraints between fields of board, where every array in first array dimension consist of 2 Variable objects
   where first one has to has lower value than second one
    */
-  private final Variable[][] relations;
+  private final Variable[][] constraints;
 
   public FutoshikiSquareBoardGameImpl(
-      int size, List<Assigment> initialAssigment, Variable[][] relations) {
+      int size, List<Assigment> initialAssigment, Variable[][] constraints) {
     super(size, initialAssigment);
-    this.relations = relations;
+    this.constraints = constraints;
     this.domain = new Domain(size);
   }
 
@@ -35,8 +35,8 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
       }
     }
 
-    // then check the relations
-    for (Variable[] relation : relations) {
+    // then check the constraints
+    for (Variable[] relation : constraints) {
       Variable lower = relation[0];
       Variable greater = relation[1];
 
@@ -72,6 +72,11 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
   }
 
   @Override
+  public Variable[][] getConstraints() {
+    return constraints;
+  }
+
+  @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
 
@@ -85,8 +90,8 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
     }
     sb.append("]");
 
-    sb.append(",\n relations: [");
-    for (Variable[] singleRel : relations) {
+    sb.append(",\n constraints: [");
+    for (Variable[] singleRel : constraints) {
       sb.append(Arrays.toString(singleRel));
     }
     sb.append("]");

@@ -8,9 +8,11 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import task2.csp.Assigment;
+import task2.csp.Variable;
 
 public class HTMLFileGenerator {
-  public static void generateHtmlFile(List<Assigment> assigments, String pathName, String name) {
+  public static void generateHtmlFile(
+      List<Assigment> assigments, Variable[][] constraints, String pathName, String name) {
     Collections.sort(assigments);
 
     try {
@@ -53,9 +55,28 @@ public class HTMLFileGenerator {
         sb.append(a.getValue()).append("\n");
         sb.append("</td>\n");
       }
-      sb.append("</tr>\n");
+      sb.append("</tr>\n</table>\n");
 
-      String close = "</table>\n</body>\n</html>";
+      sb.append("<span>\n").append("Constraints: \n" + "<br>\n");
+
+      for (Variable[] pair : constraints) {
+        sb.append("[")
+            .append(pair[0].getColumnIndex())
+            .append(",")
+            .append(pair[0].getRowIndex())
+            .append("]")
+            .append("'<'")
+            .append("[")
+            .append(pair[1].getColumnIndex())
+            .append(",")
+            .append(pair[1].getRowIndex())
+            .append("]")
+            .append("\n")
+            .append("<br>\n");
+      }
+      sb.append("</span>\n");
+
+      String close = "\n</body>\n</html>";
 
       BufferedWriter bufferedWriter = Files.newBufferedWriter(path);
       bufferedWriter.write(htmlCode + sb.toString() + close);

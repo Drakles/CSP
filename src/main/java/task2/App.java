@@ -28,6 +28,7 @@ public class App {
     System.out.println("time: " + (System.currentTimeMillis() - time));
     System.out.println(assigments);
 
-    HTMLFileGenerator.generateHtmlFile(assigments, "out/futo_4_0.html", "futo_4_0");
+    HTMLFileGenerator.generateHtmlFile(
+        assigments, futoshikiBoardGame.getConstraints(), "out/futo_4_0.html", "futo_4_0");
   }
 }
