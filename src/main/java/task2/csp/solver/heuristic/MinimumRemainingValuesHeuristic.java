@@ -1,4 +1,4 @@
-package task2.csp.solver.strategy;
+package task2.csp.solver.heuristic;
 
 import java.util.List;
 import task2.boardgame.SquareBoardGame;
@@ -26,5 +26,10 @@ public class MinimumRemainingValuesHeuristic implements Heuristic {
       }
     }
     return chosen;
+  }
+
+  @Override
+  public String toString() {
+    return "MinimumRemainingValuesHeuristic";
   }
 }

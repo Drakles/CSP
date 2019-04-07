@@ -18,4 +18,8 @@ public interface SquareBoardGame {
   List<Assigment> getInitialAssigment();
 
   Variable[][] getConstraints();
+
+  boolean isGameOver(List<Assigment> assigments);
+
+  String getName();
 }

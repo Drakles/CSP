@@ -6,18 +6,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.List;
 import task2.csp.Assigment;
 import task2.csp.Variable;
+import task2.csp.solution.Solution;
+import task2.csp.solution.SolutionCollection;
 
 public class HTMLFileGenerator {
-  public static void generateHtmlFile(
-      List<Assigment> assigments, Variable[][] constraints, String pathName, String name) {
-    Collections.sort(assigments);
+  public static void generateHtmlFile(SolutionCollection solutionCollection) {
+
+    for (Solution solution : solutionCollection.getSollutions()) {
+      Collections.sort(solution.getAssigments());
+    }
 
     try {
-      Path path = Paths.get(pathName);
-      Files.createDirectories(path.getParent());
+      Path path = Paths.get(solutionCollection.getFile());
+      //      Files.createDirectories(path.getParent());
       if (Files.exists(path)) {
         Files.delete(path);
       }
@@ -36,30 +39,26 @@ public class HTMLFileGenerator {
               + "<body>\n"
               + "\n"
               + "<h2>"
-              + name
+              + solutionCollection.getGameName()
               + "</h2>\n"
+              + "<span>\n"
+              + "method: "
+              + solutionCollection.getSolveMethod()
               + "\n"
-              + "<table style=\"width:10%\">\n";
+              + "</span>\n"
+              + "<br>\n"
+              + "<span>\n"
+              + "heuristic: "
+              + solutionCollection.getHeuristic()
+              + "\n"
+              + "</span>\n"
+              + "<br>\n";
 
       StringBuilder sb = new StringBuilder();
 
-      int row = 0;
-      sb.append("<tr>\n");
-      for (Assigment a : assigments) {
-        if (row != a.getVariable().getRowIndex()) {
-          sb.append("</tr>\n");
-          row = a.getVariable().getRowIndex();
-          sb.append("<tr>\n");
-        }
-        sb.append("<td>\n");
-        sb.append(a.getValue()).append("\n");
-        sb.append("</td>\n");
-      }
-      sb.append("</tr>\n</table>\n");
-
       sb.append("<span>\n").append("Constraints: \n" + "<br>\n");
 
-      for (Variable[] pair : constraints) {
+      for (Variable[] pair : solutionCollection.getConstraints()) {
         sb.append("[")
             .append(pair[0].getColumnIndex())
             .append(",")
@@ -75,6 +74,29 @@ public class HTMLFileGenerator {
             .append("<br>\n");
       }
       sb.append("</span>\n");
+
+      sb.append("<table style=\"width:10%\">\n");
+      for (Solution solution : solutionCollection.getSollutions()) {
+
+        int row = 0;
+        sb.append("<tr>\n");
+        for (Assigment a : solution.getAssigments()) {
+          if (row != a.getVariable().getRowIndex()) {
+            sb.append("</tr>\n");
+            row = a.getVariable().getRowIndex();
+            sb.append("<tr>\n");
+          }
+          sb.append("<td>\n");
+          sb.append(a.getValue()).append("\n");
+          sb.append("</td>\n");
+        }
+        sb.append("</tr>\n</table>\n");
+        sb.append("<span>\n")
+            .append("moves: ")
+            .append(solution.getMoves())
+            .append("\n")
+            .append("</span>\n");
+      }
 
       String close = "\n</body>\n</html>";
 

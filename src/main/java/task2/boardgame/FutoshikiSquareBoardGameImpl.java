@@ -15,12 +15,14 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
   where first one has to has lower value than second one
    */
   private final Variable[][] constraints;
+  private final int assigmentsLimit;
 
   public FutoshikiSquareBoardGameImpl(
       int size, List<Assigment> initialAssigment, Variable[][] constraints) {
     super(size, initialAssigment);
     this.constraints = constraints;
     this.domain = new Domain(size);
+    assigmentsLimit = getSize() * getSize();
   }
 
   @Override
@@ -74,6 +76,16 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
   @Override
   public Variable[][] getConstraints() {
     return constraints;
+  }
+
+  @Override
+  public boolean isGameOver(List<Assigment> assigments) {
+    return assigments.size() == assigmentsLimit;
+  }
+
+  @Override
+  public String getName() {
+    return "Futoshiki";
   }
 
   @Override

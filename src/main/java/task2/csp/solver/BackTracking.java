@@ -1,43 +1,41 @@
 package task2.csp.solver;
 
 import static task2.csp.AssigmentFactory.createAssigment;
-import static task2.csp.solver.CSPSolver.Result.FAIL;
-import static task2.csp.solver.CSPSolver.Result.SUCCESS;
 
 import java.util.List;
 import task2.boardgame.SquareBoardGame;
 import task2.csp.Assigment;
 import task2.csp.Variable;
-import task2.csp.solver.strategy.Heuristic;
+import task2.csp.solution.SolutionCollection;
+import task2.csp.solver.heuristic.Heuristic;
 
 public class BackTracking extends CSPSolver {
 
-  private final int assigmentsLimit = game.getSize() * game.getSize();
-
-  public BackTracking(Heuristic heuristic, SquareBoardGame game) {
-    super(heuristic, game);
+  public BackTracking(
+      Heuristic heuristic, SquareBoardGame game, SolutionCollection solutionCollection) {
+    super(heuristic, game, solutionCollection);
   }
 
-  public Result run(List<Assigment> assigments, List<Variable> variables, int level) {
-    if (assigments.size() == assigmentsLimit) {
-      return SUCCESS;
+  public SolutionCollection run(List<Assigment> assigments, List<Variable> variables, int level) {
+    if (game.isGameOver(assigments)) {
+      addSolution(assigments, level);
+      return this.solutionCollection;
     }
 
     Variable var = heuristic.choose(variables, assigments, game);
     variables.remove(var);
 
-    for (Integer value : game.getPotentialValues(var, assigments)) {
+    for (Integer value : getPotentialValues(var, assigments)) {
       Assigment assigment = createAssigment(value, var);
       assigments.add(assigment);
 
-      Result result = run(assigments, variables, ++level);
-      if (result != FAIL) {
-        return result;
+      SolutionCollection result = run(assigments, variables, ++level);
+      if (result != null) {
+        return this.solutionCollection;
       }
-
       assigments.remove(assigment);
     }
     variables.add(var);
-    return FAIL;
+    return null;
   }
 }

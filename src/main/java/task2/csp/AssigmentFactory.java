@@ -14,7 +14,6 @@ public class AssigmentFactory {
         return nestedVariableMap.get(variable);
       }
     }
-
     return assigmentsCached
         .computeIfAbsent(value, v -> new HashMap<>())
         .computeIfAbsent(variable, v -> new Assigment(value, variable));
