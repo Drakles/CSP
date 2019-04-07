@@ -19,11 +19,10 @@ public class App {
     List<Variable> variables = VariableUtils.getVariables(futoshikiBoardGame);
 
     BackTracking backTracking =
-        new BackTracking(variables, new MinimumRemainingValuesHeuristic(), futoshikiBoardGame);
+        new BackTracking(new MinimumRemainingValuesHeuristic(), futoshikiBoardGame);
 
     List<Assigment> assigments = new LinkedList<>(futoshikiBoardGame.getInitialAssigment());
-
-    backTracking.perform(assigments, variables, 0);
+    backTracking.run(assigments, variables, 0);
 
     System.out.println("time: " + (System.currentTimeMillis() - time));
     System.out.println(assigments);

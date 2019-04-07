@@ -21,7 +21,7 @@ public class Assigment implements Comparable<Assigment> {
 
   @Override
   public String toString() {
-    return "Assigment{" + "value=" + value + ", variable=" + variable + '}';
+    return "assigment{" + variable + " = " + value + '}';
   }
 
   @Override

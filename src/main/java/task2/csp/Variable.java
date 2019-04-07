@@ -25,7 +25,7 @@ public class Variable implements Comparable<Variable> {
 
   @Override
   public String toString() {
-    return "Variable{" + "columnIndex=" + columnIndex + ", rowIndex=" + rowIndex + '}';
+    return "[" + columnIndex + "," + rowIndex + ']';
   }
 
   @Override

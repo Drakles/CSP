@@ -8,6 +8,6 @@ import task2.csp.solver.strategy.Heuristic;
 public class ForwardChecking extends CSPSolver {
 
   public ForwardChecking(List<Variable> variables, Heuristic heuristic, SquareBoardGame game) {
-    super(variables, heuristic, game);
+    super(heuristic, game);
   }
 }
