@@ -14,11 +14,11 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
   Describe constraints between fields of board, where every array in first array dimension consist of 2 Variable objects
   where first one has to has lower value than second one
    */
-  private final Variable[][] constraints;
+  private final List<Variable[]> constraints;
   private final int assigmentsLimit;
 
   public FutoshikiSquareBoardGameImpl(
-      int size, List<Assigment> initialAssigment, Variable[][] constraints) {
+      int size, List<Assigment> initialAssigment, List<Variable[]> constraints) {
     super(size, initialAssigment);
     this.constraints = constraints;
     this.domain = new Domain(size);
@@ -77,7 +77,7 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
   }
 
   @Override
-  public Variable[][] getConstraints() {
+  public List<Variable[]> getConstraints() {
     return constraints;
   }
 

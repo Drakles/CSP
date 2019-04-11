@@ -4,10 +4,7 @@ import static task2.csp.AssigmentFactory.createAssigment;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import task2.boardgame.FutoshikiSquareBoardGameImpl;
 import task2.csp.Assigment;
 import task2.csp.Variable;
@@ -56,15 +53,9 @@ public class Loader {
           relations.add(relation);
         }
 
-        Variable[][] relationsConverted = new Variable[relations.size()][2];
-        Iterator<Variable[]> relIter = relations.iterator();
-
-        for (int i = 0; i < relationsConverted.length; i++) {
-          relationsConverted[i] = relIter.next();
-        }
-
         futoshikiBoardGame =
-            new FutoshikiSquareBoardGameImpl(size, initialAssigments, relationsConverted);
+            new FutoshikiSquareBoardGameImpl(
+                size, initialAssigments, Collections.unmodifiableList(relations));
 
       } catch (FileNotFoundException e) {
         e.printStackTrace();

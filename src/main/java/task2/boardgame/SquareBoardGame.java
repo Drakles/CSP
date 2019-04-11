@@ -17,7 +17,7 @@ public interface SquareBoardGame {
 
   List<Assigment> getInitialAssigment();
 
-  Variable[][] getConstraints();
+  List<Variable[]> getConstraints();
 
   boolean isOver(List<Assigment> assigments);
 

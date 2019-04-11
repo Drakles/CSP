@@ -41,7 +41,7 @@ public class SolutionCollection {
     return game.getName();
   }
 
-  public Variable[][] getConstraints() {
+  public List<Variable[]> getConstraints() {
     return game.getConstraints();
   }
 
