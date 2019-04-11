@@ -1,5 +1,6 @@
 package task2.csp.solution;
 
+import java.util.ArrayList;
 import java.util.List;
 import task2.csp.Assigment;
 
@@ -8,7 +9,7 @@ public class Solution {
   private final int moves;
 
   public Solution(List<Assigment> assigments, int moves) {
-    this.assigments = assigments;
+    this.assigments = new ArrayList<>(assigments);
     this.moves = moves;
   }
 

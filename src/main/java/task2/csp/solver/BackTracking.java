@@ -17,7 +17,7 @@ public class BackTracking extends CSPSolver {
   }
 
   public SolutionCollection run(List<Assigment> assigments, List<Variable> variables, int level) {
-    if (game.isGameOver(assigments)) {
+    if (game.isOver(assigments)) {
       addSolution(assigments, level);
       return this.solutionCollection;
     }
@@ -29,10 +29,7 @@ public class BackTracking extends CSPSolver {
       Assigment assigment = createAssigment(value, var);
       assigments.add(assigment);
 
-      SolutionCollection result = run(assigments, variables, ++level);
-      if (result != null) {
-        return this.solutionCollection;
-      }
+      run(assigments, variables, ++level);
       assigments.remove(assigment);
     }
     variables.add(var);

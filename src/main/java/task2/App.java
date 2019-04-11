@@ -1,5 +1,6 @@
 package task2;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import task2.boardgame.SquareBoardGame;
 import task2.csp.Variable;
@@ -13,7 +14,9 @@ import task2.out.HTMLFileGenerator;
 public class App {
   public static void main(String[] args) {
 
-    SquareBoardGame futoshikiBoardGame = Loader.scanFutoshikiBoard("resources/test_futo_4_0.txt");
+    String resourceFile = "futo_4x4_empty";
+    SquareBoardGame futoshikiBoardGame =
+        Loader.scanFutoshikiBoard("resources/" + resourceFile + ".txt");
 
     long time = System.currentTimeMillis();
     List<Variable> variables = VariableUtils.getVariables(futoshikiBoardGame);
@@ -27,7 +30,7 @@ public class App {
                 heuristic.toString(),
                 BackTracking.class.getName(),
                 futoshikiBoardGame,
-                "out/futo_4_0.html"));
+                "out/" + resourceFile + LocalDateTime.now() + ".html"));
 
     backTracking.run(futoshikiBoardGame.getInitialAssigment(), variables, 0);
 

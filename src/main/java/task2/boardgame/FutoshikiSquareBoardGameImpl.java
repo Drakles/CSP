@@ -27,6 +27,9 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
 
   @Override
   public boolean isAssigmentCorrect(Variable var, Integer value, List<Assigment> assigments) {
+    if (var == null) {
+      return false;
+    }
     // first check if this value is already used in row or column
     for (Assigment assigment : assigments) {
       Variable assigmentVariable = assigment.getVariable();
@@ -79,7 +82,7 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
   }
 
   @Override
-  public boolean isGameOver(List<Assigment> assigments) {
+  public boolean isOver(List<Assigment> assigments) {
     return assigments.size() == assigmentsLimit;
   }
 

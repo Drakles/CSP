@@ -39,7 +39,7 @@ public class HTMLFileGenerator {
               + "<body>\n"
               + "\n"
               + "<h2>"
-              + solutionCollection.getGameName()
+              + solutionCollection.getFile()
               + "</h2>\n"
               + "<span>\n"
               + "method: "
@@ -50,6 +50,12 @@ public class HTMLFileGenerator {
               + "<span>\n"
               + "heuristic: "
               + solutionCollection.getHeuristic()
+              + "\n"
+              + "</span>\n"
+              + "<br>\n"
+              + "<span>\n"
+              + "solutions found: "
+              + solutionCollection.getSollutions().size()
               + "\n"
               + "</span>\n"
               + "<br>\n";
@@ -75,8 +81,8 @@ public class HTMLFileGenerator {
       }
       sb.append("</span>\n");
 
-      sb.append("<table style=\"width:10%\">\n");
       for (Solution solution : solutionCollection.getSollutions()) {
+        sb.append("<table style=\"width:10%\">\n");
 
         int row = 0;
         sb.append("<tr>\n");
