@@ -2,6 +2,7 @@ package task2;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import task2.boardgame.SquareBoardGame;
 import task2.csp.Variable;
 import task2.csp.solution.SolutionCollection;
@@ -32,7 +33,7 @@ public class App {
                 futoshikiBoardGame,
                 "out/" + resourceFile + LocalDateTime.now() + ".html"));
 
-    backTracking.run(futoshikiBoardGame.getInitialAssigment(), variables, 0);
+    backTracking.run(futoshikiBoardGame.getInitialAssigment(), variables, new AtomicInteger(0));
 
     System.out.println("time: " + (System.currentTimeMillis() - time));
 

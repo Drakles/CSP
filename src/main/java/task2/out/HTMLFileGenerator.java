@@ -58,6 +58,15 @@ public class HTMLFileGenerator {
               + solutionCollection.getSollutions().size()
               + "\n"
               + "</span>\n"
+              + "<br>\n"
+              + "<span>\n"
+              + "total moves: "
+              + solutionCollection
+                  .getSollutions()
+                  .get(solutionCollection.getSollutions().size() - 1)
+                  .getMoves()
+              + "\n"
+              + "</span>\n"
               + "<br>\n";
 
       StringBuilder sb = new StringBuilder();
