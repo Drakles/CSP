@@ -17,9 +17,14 @@ public class BackTracking extends CSPSolver {
     super(heuristic, game, solutionCollection);
   }
 
+  @Override
   public SolutionCollection run(
       List<Assigment> assigments, List<Variable> variables, AtomicInteger level) {
     level.getAndIncrement();
+
+    if (!game.isLastAssigmentCorrect(assigments)) {
+      return null;
+    }
 
     if (game.isOver(assigments)) {
       addSolution(assigments, level.get());
@@ -30,12 +35,10 @@ public class BackTracking extends CSPSolver {
     variables.remove(var);
 
     for (Integer value : game.getDomain().getDomainValues()) {
-      if (game.isAssigmentCorrect(var, value, assigments)) {
-        Assigment assigment = createAssigment(value, var);
-        assigments.add(assigment);
-        run(assigments, variables, level);
-        assigments.remove(assigment);
-      }
+      Assigment assigment = createAssigment(value, var);
+      assigments.add(assigment);
+      run(assigments, variables, level);
+      assigments.remove(assigment);
     }
 
     variables.add(var);

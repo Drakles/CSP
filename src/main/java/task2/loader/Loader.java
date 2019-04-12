@@ -5,14 +5,14 @@ import static task2.csp.AssigmentFactory.createAssigment;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import task2.boardgame.FutoshikiSquareBoardGameImpl;
+import task2.boardgame.Futoshiki;
 import task2.csp.Assigment;
 import task2.csp.Variable;
 
 public class Loader {
 
-  public static FutoshikiSquareBoardGameImpl scanFutoshikiBoard(String filePath) {
-    FutoshikiSquareBoardGameImpl futoshikiBoardGame = null;
+  public static Futoshiki scanFutoshikiBoard(String filePath) {
+    Futoshiki futoshikiBoardGame = null;
     if (filePath != null) {
       File sourceFile = new File(filePath);
       try {
@@ -54,8 +54,7 @@ public class Loader {
         }
 
         futoshikiBoardGame =
-            new FutoshikiSquareBoardGameImpl(
-                size, initialAssigments, Collections.unmodifiableList(relations));
+            new Futoshiki(size, initialAssigments, Collections.unmodifiableList(relations));
 
       } catch (FileNotFoundException e) {
         e.printStackTrace();

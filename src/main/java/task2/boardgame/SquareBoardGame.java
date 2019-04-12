@@ -11,6 +11,8 @@ public interface SquareBoardGame {
 
   boolean isAssigmentCorrect(Variable var, Integer value, List<Assigment> assigments);
 
+  boolean isLastAssigmentCorrect(List<Assigment> assigments);
+
   List<Integer> getPotentialValues(Variable variable, List<Assigment> assigments);
 
   Domain getDomain();

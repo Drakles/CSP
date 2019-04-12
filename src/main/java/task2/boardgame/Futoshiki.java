@@ -1,15 +1,10 @@
 package task2.boardgame;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import task2.csp.Assigment;
-import task2.csp.Domain;
 import task2.csp.Variable;
 
-public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
-
-  private final Domain domain;
+public class Futoshiki extends SquareSquareBoardGameImpl {
   /*
   Describe constraints between fields of board, where every array in first array dimension consist of 2 Variable objects
   where first one has to has lower value than second one
@@ -17,11 +12,9 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
   private final List<Variable[]> constraints;
   private final int assigmentsLimit;
 
-  public FutoshikiSquareBoardGameImpl(
-      int size, List<Assigment> initialAssigment, List<Variable[]> constraints) {
+  public Futoshiki(int size, List<Assigment> initialAssigment, List<Variable[]> constraints) {
     super(size, initialAssigment);
     this.constraints = constraints;
-    this.domain = new Domain(size);
     assigmentsLimit = getSize() * getSize();
   }
 
@@ -61,6 +54,18 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
   }
 
   @Override
+  public boolean isLastAssigmentCorrect(List<Assigment> assigments) {
+    boolean result = true;
+    if (!assigments.isEmpty()) {
+      Assigment lastAssigment = assigments.remove(assigments.size() - 1);
+      result =
+          isAssigmentCorrect(lastAssigment.getVariable(), lastAssigment.getValue(), assigments);
+      assigments.add(lastAssigment);
+    }
+    return result;
+  }
+
+  @Override
   public List<Integer> getPotentialValues(Variable variable, List<Assigment> assigments) {
     List<Integer> result = new LinkedList<>();
     for (Integer value : domain.getDomainValues()) {
@@ -69,11 +74,6 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
       }
     }
     return result;
-  }
-
-  @Override
-  public Domain getDomain() {
-    return domain;
   }
 
   @Override
@@ -95,7 +95,7 @@ public class FutoshikiSquareBoardGameImpl extends SquareSquareBoardGameImpl {
   public String toString() {
     StringBuilder sb = new StringBuilder();
 
-    sb.append("FutoshikiSquareBoardGameImpl{ ");
+    sb.append("Futoshiki{ ");
 
     sb.append(" size: ").append(size);
 

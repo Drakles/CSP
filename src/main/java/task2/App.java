@@ -7,6 +7,7 @@ import task2.boardgame.SquareBoardGame;
 import task2.csp.Variable;
 import task2.csp.solution.SolutionCollection;
 import task2.csp.solver.BackTracking;
+import task2.csp.solver.SolutionFinder;
 import task2.csp.solver.heuristic.Heuristic;
 import task2.csp.solver.heuristic.MinimumRemainingValuesHeuristic;
 import task2.loader.Loader;
@@ -23,7 +24,7 @@ public class App {
     List<Variable> variables = VariableUtils.getVariables(futoshikiBoardGame);
     Heuristic heuristic = new MinimumRemainingValuesHeuristic();
 
-    BackTracking backTracking =
+    SolutionFinder solutionFinder =
         new BackTracking(
             heuristic,
             futoshikiBoardGame,
@@ -33,10 +34,10 @@ public class App {
                 futoshikiBoardGame,
                 "out/" + resourceFile + LocalDateTime.now() + ".html"));
 
-    backTracking.run(futoshikiBoardGame.getInitialAssigment(), variables, new AtomicInteger(0));
+    solutionFinder.run(futoshikiBoardGame.getInitialAssigment(), variables, new AtomicInteger(0));
 
     System.out.println("time: " + (System.currentTimeMillis() - time));
 
-    HTMLFileGenerator.generateHtmlFile(backTracking.getSolutionCollection());
+    HTMLFileGenerator.generateHtmlFile(solutionFinder.getSolutionCollection());
   }
 }

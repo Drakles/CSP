@@ -11,20 +11,30 @@ public class DegreeHeuristic implements Heuristic {
   public Variable choose(
       List<Variable> variableList, List<Assigment> assigments, SquareBoardGame game) {
     // chose the one with the most constraints among remaining variables
-    //    return variableList
-    //        .parallelStream()
-    //        .max(Comparator.comparingInt(v -> numberOfOccurences(v, game.getConstraints())))
-    //        .orElse(null);
-    return null;
+    Variable chosen = null;
+
+    if (!variableList.isEmpty()) {
+      chosen = variableList.get(0);
+      int constraintsNumber = numberOfOccurences(chosen, game.getConstraints());
+      for (Variable var : variableList) {
+        int nextConstraintNumber = numberOfOccurences(var, game.getConstraints());
+        if (nextConstraintNumber > constraintsNumber) {
+          constraintsNumber = nextConstraintNumber;
+          chosen = var;
+        }
+      }
+    }
+
+    return chosen;
   }
 
-  //  private int numberOfOccurences(Variable chosen, List<Variable[]> constraints) {
-  //    return (int)
-  //        constraints
-  //            .parallelStream()
-  //            .filter(constraint -> chosen.equals(constraint[0]) || chosen.equals(constraint[1]))
-  //            .count();
-  //  }
+  private int numberOfOccurences(Variable chosen, List<Variable[]> constraints) {
+    return (int)
+        constraints
+            .parallelStream()
+            .filter(constraint -> chosen.equals(constraint[0]) || chosen.equals(constraint[1]))
+            .count();
+  }
 
   @Override
   public String toString() {
