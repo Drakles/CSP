@@ -19,7 +19,9 @@ public interface SquareBoardGame {
 
   List<Assigment> getInitialAssigment();
 
-  List<Variable[]> getConstraints();
+  String getConstraintsToString();
+
+  int numberOfOccurencesVariableInConstraints(Variable var);
 
   boolean isOver(List<Assigment> assigments);
 

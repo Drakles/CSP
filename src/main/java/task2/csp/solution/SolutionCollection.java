@@ -3,7 +3,6 @@ package task2.csp.solution;
 import java.util.LinkedList;
 import java.util.List;
 import task2.boardgame.SquareBoardGame;
-import task2.csp.Variable;
 
 public class SolutionCollection {
   private final List<Solution> sollutions;
@@ -41,12 +40,16 @@ public class SolutionCollection {
     return game.getName();
   }
 
-  public List<Variable[]> getConstraints() {
-    return game.getConstraints();
+  public String getConstraintsToString() {
+    return game.getConstraintsToString();
   }
 
   public String getFile() {
     return file;
+  }
+
+  public int getTotalMoves() {
+    return !sollutions.isEmpty() ? sollutions.get(sollutions.size() - 1).getMoves() : 0;
   }
 
   @Override

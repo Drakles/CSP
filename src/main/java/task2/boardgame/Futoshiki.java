@@ -11,9 +11,11 @@ public class Futoshiki extends SquareSquareBoardGameImpl {
    */
   private final List<Variable[]> constraints;
   private final int assigmentsLimit;
+  private final List<Assigment> initialAssigment;
 
   public Futoshiki(int size, List<Assigment> initialAssigment, List<Variable[]> constraints) {
-    super(size, initialAssigment);
+    super(size);
+    this.initialAssigment = initialAssigment;
     this.constraints = constraints;
     assigmentsLimit = getSize() * getSize();
   }
@@ -77,8 +79,24 @@ public class Futoshiki extends SquareSquareBoardGameImpl {
   }
 
   @Override
-  public List<Variable[]> getConstraints() {
-    return constraints;
+  public String getConstraintsToString() {
+    StringBuilder sb = new StringBuilder();
+    for (Variable[] pair : constraints) {
+      sb.append("[")
+          .append(pair[0].getColumnIndex())
+          .append(",")
+          .append(pair[0].getRowIndex())
+          .append("]")
+          .append("'<'")
+          .append("[")
+          .append(pair[1].getColumnIndex())
+          .append(",")
+          .append(pair[1].getRowIndex())
+          .append("]")
+          .append("\n")
+          .append("<br>\n");
+    }
+    return sb.toString();
   }
 
   @Override
@@ -87,8 +105,24 @@ public class Futoshiki extends SquareSquareBoardGameImpl {
   }
 
   @Override
+  public int numberOfOccurencesVariableInConstraints(Variable var) {
+    int count = 0;
+    for (Variable[] constraint : constraints) {
+      if (var.equals(constraint[0]) || var.equals(constraint[1])) {
+        count++;
+      }
+    }
+    return count;
+  }
+
+  @Override
   public String getName() {
     return "Futoshiki";
+  }
+
+  @Override
+  public List<Assigment> getInitialAssigment() {
+    return initialAssigment;
   }
 
   @Override

@@ -15,25 +15,16 @@ public class DegreeHeuristic implements Heuristic {
 
     if (!variableList.isEmpty()) {
       chosen = variableList.get(0);
-      int constraintsNumber = numberOfOccurences(chosen, game.getConstraints());
+      int constraintsNumber = game.numberOfOccurencesVariableInConstraints(chosen);
       for (Variable var : variableList) {
-        int nextConstraintNumber = numberOfOccurences(var, game.getConstraints());
+        int nextConstraintNumber = game.numberOfOccurencesVariableInConstraints(var);
         if (nextConstraintNumber > constraintsNumber) {
           constraintsNumber = nextConstraintNumber;
           chosen = var;
         }
       }
     }
-
     return chosen;
-  }
-
-  private int numberOfOccurences(Variable chosen, List<Variable[]> constraints) {
-    return (int)
-        constraints
-            .parallelStream()
-            .filter(constraint -> chosen.equals(constraint[0]) || chosen.equals(constraint[1]))
-            .count();
   }
 
   @Override

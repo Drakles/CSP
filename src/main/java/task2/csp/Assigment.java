@@ -6,7 +6,7 @@ public class Assigment implements Comparable<Assigment> {
   private final int value;
   private final Variable variable;
 
-  Assigment(int value, Variable variable) {
+  public Assigment(int value, Variable variable) {
     this.value = value;
     this.variable = variable;
   }

@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import task2.csp.Assigment;
-import task2.csp.Variable;
 import task2.csp.solution.Solution;
 import task2.csp.solution.SolutionCollection;
 
@@ -20,7 +19,6 @@ public class HTMLFileGenerator {
 
     try {
       Path path = Paths.get(solutionCollection.getFile());
-      //      Files.createDirectories(path.getParent());
       if (Files.exists(path)) {
         Files.delete(path);
       }
@@ -61,10 +59,7 @@ public class HTMLFileGenerator {
               + "<br>\n"
               + "<span>\n"
               + "total moves: "
-              + solutionCollection
-                  .getSollutions()
-                  .get(solutionCollection.getSollutions().size() - 1)
-                  .getMoves()
+              + solutionCollection.getTotalMoves()
               + "\n"
               + "</span>\n"
               + "<br>\n";
@@ -72,22 +67,7 @@ public class HTMLFileGenerator {
       StringBuilder sb = new StringBuilder();
 
       sb.append("<span>\n").append("Constraints: \n" + "<br>\n");
-
-      for (Variable[] pair : solutionCollection.getConstraints()) {
-        sb.append("[")
-            .append(pair[0].getColumnIndex())
-            .append(",")
-            .append(pair[0].getRowIndex())
-            .append("]")
-            .append("'<'")
-            .append("[")
-            .append(pair[1].getColumnIndex())
-            .append(",")
-            .append(pair[1].getRowIndex())
-            .append("]")
-            .append("\n")
-            .append("<br>\n");
-      }
+      sb.append(solutionCollection.getConstraintsToString());
       sb.append("</span>\n");
 
       for (Solution solution : solutionCollection.getSollutions()) {
